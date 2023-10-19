@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>Seq</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Isbn</th>
+            <th>Genre</th>
+            <th>Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="book, bookStat : ${book}"> <!-- UserResDTO -->
+            <td th:text="${bookStat.count}"></td> <!-- .count-> 1부터 시작 / .index-> 0부터 시작 -->
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.isbn}"></td>
+            <td th:text="${book.genre}"></td>
+            <td th:text="${#temporals.format(book.createdAt,'yyyy-MM-dd hh:mm')}"></td>
+            <td><a th:href="@{/bookpage/edit/{id}(id=${book.id})}">update</a></td>
+            <td><a th:href="@{/bookpage/delete/{id}(id=${book.id})}">delete</a></td>
+
+        </tr>
+    </table>
+    <p><a href="/bookpage/signup">Insert</a></p>
+</body>
+</html>
